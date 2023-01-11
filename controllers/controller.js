@@ -141,6 +141,78 @@ class Controller{
         }
     }
 
+    static async addHistory(req, res, next){
+        try {
+            const { customerName, price } = req.body
+            let data = await History.create( { customerName, price , cashierName: req.user.email})
+            res.status(201).json({message: 'Create History'})
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async readHistory(req, res, next){
+        try {
+            let data = await History.findAll()
+            res.status(200).json(data)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async readHistoryWeek(req, res, next){
+        try {
+            const sevenDaysAgo = new Date(new Date().setDate(new Date().getDate() -  7));
+            let data = await History.findAll({
+                where: {
+                    createdAt: { [Op.and]: [{ [Op.gte]: sevenDaysAgo }, { [Op.lte]: new Date() }] }
+                },
+                attributes: [
+                    [Sequelize.literal(`DATE("createdAt")`), 'date'],
+                    [Sequelize.fn('sum', Sequelize.col('price')), 'price'],
+                    [Sequelize.literal(`COUNT(*)`), 'count']
+                ],
+                group: ['date'],
+            });
+            
+            res.status(200).json(data)
+        } catch (error) {
+          next(error)   
+        }
+    }
+
+    static async sendEmail(req, res, next){
+        try {
+            const {dataTrx, customerName, totalPrice, email} = req.body
+            if (dataTrx.length === 0) {
+                throw { name : 'Choose One'}
+            }
+            if (!email) {
+                throw {name : "Email is required"}
+            }
+            const templateEmail = {
+                from: 'tesarchandraesnawan@gmail.com',
+                to: email,
+                subject: 'Invoice Restaurant',
+                html: `
+                ===================================
+                <h2>Hai, ${customerName}</h2> 
+                ===================================
+                ${dataTrx.map(el=> {
+                return `<h3>${el.name} @ ${el.amount} => <span>${formatRupiah(el.price)}</span></h3>`})}
+                ===================================
+                <h3>Total : ${formatRupiah(totalPrice)}</h3>
+                <h4>Thanks :)</h4>`
+            }
+            kirimEmail(templateEmail)
+            res.status(200).json({message: 'Invoice has been send'})
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    
+
     
 
     
