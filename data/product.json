@@ -1,0 +1,104 @@
+[
+    {
+        "name": "Americano",
+        "price": "20000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/921a409e6f55407da52eee4c8ad13ada.jpg?impolicy=1by1_wide_topcrop_630",
+        "type": "Drink"
+    },
+    {
+        "name": "Chocolate",
+        "price": "25000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/b0f45bda44464780a601e51cb404f780.jpg?impolicy=1by1_wide_topcrop_630",
+        "type": "Drink"
+    },
+    {
+        "name": "Caramel Brulee Latte",
+        "price": "30000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/616071114f834a3b9793ec3f7273daab.jpg?impolicy=1by1_wide_topcrop_630",
+        "type": "Drink"
+    },
+    {
+        "name": "Cinamon Dolce Latte",
+        "price": "25000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/b5ee0554cdd64959a86530922cea7991.jpg?impolicy=1by1_wide_topcrop_630",
+        "type": "Drink"
+    },
+    {
+        "name": "Caramel Macchiato",
+        "price": "23000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/363835b1db024636adeb4089ebb96291.jpg?impolicy=1by1_wide_topcrop_630",
+        "type": "Drink"
+    },
+    {
+        "name": "Caffee Mocha",
+        "price": "25000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/0360378c6e774cc3a38d870fc75d5462.jpg?impolicy=1by1_wide_topcrop_630",
+        "type": "Drink"
+    },
+    {
+        "name": "Vanilla Sweet",
+        "price": "20000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/07951b9a7d7d47a2892dfa7a707fd318.jpg?impolicy=1by1_wide_topcrop_630",
+        "type": "Drink"
+    },
+    {
+        "name": "Espresso",
+        "price": "15000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/7e0863732426489d81f0167e5a3fdaf2.jpg?impolicy=1by1_wide_topcrop_630",
+        "type": "Drink"
+    },
+    {
+        "name": "Mango Dragonfruit",
+        "price": "25000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/c51376156a204e69aba133d3b9009171.jpg?impolicy=1by1_wide_topcrop_630",
+        "type": "Drink"
+    },
+    {
+        "name": "Cranberry Bliss",
+        "price": "20000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/43a95b66e03e48cfa130ce16323eb644.jpg?impolicy=1by1_medium_630",
+        "type": "Food"
+    },
+    {
+        "name": "Chocolate Brownie",
+        "price": "10000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/f827715797044a78bb79b86728a079cf.jpg?impolicy=1by1_medium_630",
+        "type": "Food"
+    },
+    {
+        "name": "Chocolate Chip Cookie",
+        "price": "15000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/7274a0da5453434aaa63b133edd3ce5c.jpg?impolicy=1by1_medium_630",
+        "type": "Food"
+    },
+    {
+        "name": "Butter Croissant",
+        "price": "15000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/e39e1d6044634535a027301d982c5842.jpg?impolicy=1by1_medium_630",
+        "type": "Food"
+    },
+    {
+        "name": "Chocolate Croissant",
+        "price": "15000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/11a5dc6219434a4cbf81b195c14a393e.jpg?impolicy=1by1_medium_630",
+        "type": "Food"
+    },
+    {
+        "name": "Cheese Danish",
+        "price": "10000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/b87eeb626b344c4a8ccb042e4aff4ab9.jpg?impolicy=1by1_medium_630",
+        "type": "Food"
+    },
+    {
+        "name": "Blueberry Muffin",
+        "price": "10000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/7d4665b4af2541e387336966c6e3f1fb.jpg?impolicy=1by1_medium_630",
+        "type": "Food"
+    },
+    {
+        "name": "Blueberry Scone",
+        "price": "10000",
+        "imageUrl": "https://globalassets.starbucks.com/assets/be269a8f32c14f0cb58b81a50d1d100e.jpg?impolicy=1by1_medium_630",
+        "type": "Food"
+    }
+]
