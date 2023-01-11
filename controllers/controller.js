@@ -102,6 +102,47 @@ class Controller{
         }
     }
 
+    static async forgotpassword(req, res, next){
+        try {
+            const {email} = req.body
+            const user = await User.findOne({where: {email}})
+            if (!user) {
+                throw{name : "Data not found"}
+            }
+            let payload = {
+                id: user.id
+            }
+            const token = create_token(payload).split('.').join('')
+            await User.update({resetPasswordLink: token}, {where: {email}})
+            const templateEmail = {
+                from: 'tesarchandraesnawan@gmail.com',
+                to: email,
+                subject: 'Link Reset Password',
+                html: `<h1>Haii, Dicatet ya emailnya!</h1> <p>silahkan klik link dibawah</p> <p>${process.env.BASE_URL}/resetpassword/${token}</p>`
+            }
+            kirimEmail(templateEmail)
+            res.status(200).json('Link berhasil terkirim')
+        } catch (error) {
+          next(error)   
+        }
+    }
+
+    static async resetpassword(req, res, next){
+        try {
+            const {token, password} = req.body
+            const user = await User.findOne({resetPasswordLink: token})
+            if (user) {
+                const hash = hashPassword(password)
+                await User.update({password: hash}, {where: {resetPasswordLink: token}})
+                res.status(200).json({message: 'Password berhasil diubah'})
+            }
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    
+
     
 
     
