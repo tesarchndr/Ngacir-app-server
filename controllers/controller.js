@@ -48,6 +48,61 @@ class Controller{
         }
     }
 
+    static async readAllProduct(req, res, next){
+        try {
+            const {type} = req.query
+            let option = {where: {}}
+            if (type) {
+                option.where.type = type
+            }
+            let data = await Product.findAll(option)
+            res.status(200).json(data)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async createTRX(req, res, next){
+        try {
+            const data = req.body
+            if (data.data.length === 0) {
+                throw { name : 'Choose One'}
+            } else if (!data.customerName) {
+                throw { name : 'Name is required'}
+            }
+            data.data.map(el => {
+                el.ProductId = el.id,
+                el.UserId = req.user.id,
+                el.price = el.price * el.amount
+                el.customerName = data.customerName
+                delete el.id
+                delete el.name
+                delete el.imageUrl
+                return el
+            })
+            await Transaction.bulkCreate(data)
+            // const data2 = 
+            res.status(200).json({message: 'Success create Transaction'})
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static async readTRXByName(req, res, next){
+        try {
+            const {customerName}= req.params 
+            let data = await Transaction.findAll({where: {customerName}, include: ['Product']})
+            let price = 0
+            data.forEach(el => {
+                price += el.price
+            });
+            res.status(200).json({data,price})
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    
 
     
     
