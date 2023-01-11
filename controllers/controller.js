@@ -211,6 +211,37 @@ class Controller{
         }
     }
 
+    static async loginGoogle(req, response, next) {
+        try {
+          const token = req.headers.google_token
+          const CLIENT_ID = process.env.CLIENT_ID
+          const client = new OAuth2Client(CLIENT_ID);
+          const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: CLIENT_ID, 
+          });
+          const payloadGoogle = ticket.getPayload();
+          const [user, created] = await User.findOrCreate({
+            where: {email: payloadGoogle.email},
+            defaults : {
+              email: payloadGoogle.email,
+              password: "inipassword"
+            },
+            hooks: false
+          })
+    
+          let payload = {
+            id : user.id
+          }
+          let access_token = create_token(payload)
+          response
+            .status(201)
+            .json({ access_token, email: user.email});
+        } catch (error) {
+          next(error);
+        }
+      }
+
     
 
     
