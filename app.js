@@ -1,7 +1,9 @@
-require('dotenv').config()
+if (process.env.NODE_ENV != 'production'){
+    require('dotenv').config()
+}
 const express = require('express')
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000
 const cors = require('cors')
 const router = require('./router/index')
 
@@ -29,6 +31,9 @@ app.use((err, req, res, next) => {
         message = err.name
     } else if (err.name ===  "Data not found"){
         status = 404
+        message = err.name
+    } else if (err.name === 'Unauthorized'){
+        status = 401
         message = err.name
     }
 

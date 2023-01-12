@@ -15,5 +15,6 @@ router.get('/trx/:customerName', authentication, Controller.readTRXByName)
 router.post('/histories', authentication, Controller.addHistory)
 router.get('/histories', authentication, Controller.readHistory)
 router.get('/histories/week', authentication, Controller.readHistoryWeek)
+router.get('/histories/:date', authentication, Controller.readHistoryDay)
 
 module.exports = router
