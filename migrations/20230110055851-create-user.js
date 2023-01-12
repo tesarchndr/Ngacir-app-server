@@ -18,6 +18,9 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      noHp: {
+        type: Sequelize.STRING,
+      },
       role: {
         type: Sequelize.STRING,
         allowNull: false,

@@ -46,6 +46,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
+    noHp: DataTypes.STRING,
     role: DataTypes.STRING,
     resetPasswordLink: {
       type: DataTypes.STRING,

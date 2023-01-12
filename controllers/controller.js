@@ -11,8 +11,8 @@ const { OAuth2Client } = require("google-auth-library");
 class Controller{
     static async register (req, res, next){
         try {
-            const { email, password, role = 'Admin' } = req.body
-            let data = await User.create( { email, password, role } )
+            const { email, password, noHp, role = 'Admin' } = req.body
+            let data = await User.create( { email, password, noHp,  role } )
             res.status(201).json({id: data.id, name: data.name, email: data.email})
         } catch (error) {
             next(error)
@@ -42,7 +42,7 @@ class Controller{
                 id: user.id
             }
             let access_token = create_token(payload)
-            res.status(200).json({access_token})
+            res.status(200).json({access_token, noHp: user.noHp})
         } catch (error) {
             next(error)
         }
@@ -121,7 +121,7 @@ class Controller{
                 html: `<h1>Haii, Dicatet ya emailnya!</h1> <p>silahkan klik link dibawah</p> <p>${process.env.BASE_URL}/resetpassword/${token}</p>`
             }
             kirimEmail(templateEmail)
-            res.status(200).json('Link berhasil terkirim')
+            res.status(200).json('Succes send Email')
         } catch (error) {
           next(error)   
         }
@@ -135,6 +135,8 @@ class Controller{
                 const hash = hashPassword(password)
                 await User.update({password: hash}, {where: {resetPasswordLink: token}})
                 res.status(200).json({message: 'Password berhasil diubah'})
+            } else {
+                throw{name : "Data not found"}
             }
         } catch (error) {
             next(error)
@@ -241,6 +243,28 @@ class Controller{
           next(error);
         }
       }
+
+      static async readHistoryDay(req, res, next){
+        try {
+            const {date} = req.params
+            console.log(req.params);
+            if (!date) {
+                throw{name : "Data not found"}
+            }
+            let data = await History.findAll()
+            // console.log(data);
+            let data2 =  data.filter(el => {
+               if (el.createdAt.toISOString().slice(0,10) === date) {
+                return el
+               }
+           })
+           res.status(200).json(data2)
+        } catch (error) {
+            next(error)
+        }
+      }
+
+
 
     
 
